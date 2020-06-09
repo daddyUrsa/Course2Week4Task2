@@ -15,9 +15,11 @@ class CAKeyframeAnimationController: UIViewController {
     @IBOutlet weak var startSinAnimationButton: UIButton!
     
     @IBAction func shakeAnimationTapHandler(sender: UIButton) {
+        shake()
     }
 
     @IBAction func sinAnimationTapHandler(sender: UIButton) {
+        movingPath()
     }
 
     // MARK: - Life cycle
@@ -25,6 +27,25 @@ class CAKeyframeAnimationController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         showSinPath()
+    }
+    
+    func shake() {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.05
+        animation.repeatCount = 5
+        animation.autoreverses = true
+        animation.fromValue = CGPoint(x: passcodeTextField.center.x - 6, y: passcodeTextField.center.y)
+        animation.toValue = CGPoint(x: passcodeTextField.center.x + 6, y: passcodeTextField.center.y)
+        passcodeTextField.layer.add(animation, forKey: "position")
+    }
+    
+    func movingPath() {
+        let animation = CAKeyframeAnimation(keyPath: #keyPath(CALayer.position))
+        animation.path = sinPath()
+//        orangeView.frame.contains(CGPoint(x: sinPath().currentPoint + orangeView.center.x, y: <#T##Double#>)) = sinPath().currentPoint + orangeView.center.x
+        animation.duration = 6.0
+        animation.repeatCount = .infinity
+        orangeView.layer.add(animation, forKey: "position")
     }
 }
 
