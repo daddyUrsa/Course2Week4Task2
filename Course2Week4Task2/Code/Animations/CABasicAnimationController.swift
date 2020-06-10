@@ -59,7 +59,7 @@ class CABasicAnimationController: UIViewController {
         animateMove.toValue = CGPoint(x: cyanView.center.x, y: blueView.center.y)
         animations.append(animateMove)
         
-        let animateRotation = CABasicAnimation(keyPath: "transform.rotation")
+        let animateRotation = CABasicAnimation(keyPath: "transform.rotation.z")
         animateRotation.fromValue = 0
         animateRotation.toValue = radian
         animations.append(animateRotation)
