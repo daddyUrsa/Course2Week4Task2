@@ -31,7 +31,7 @@ class CABasicAnimationController: UIViewController {
     }
 
     @objc func orangeViewTapped() {
-        let animation = CABasicAnimation(keyPath: #keyPath(CALayer.cornerRadius))
+        let animation = CABasicAnimation(keyPath: "cornerRadius")
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         animation.duration = 1.0
         animation.fromValue = 0
@@ -54,7 +54,7 @@ class CABasicAnimationController: UIViewController {
         var animations = [CABasicAnimation]()
         let radian = 315 * Double.pi / 180
         
-        let animateMove = CABasicAnimation(keyPath: #keyPath(CALayer.position))
+        let animateMove = CABasicAnimation(keyPath: "position")
         animateMove.fromValue = blueView.center
         animateMove.toValue = CGPoint(x: cyanView.center.x, y: blueView.center.y)
         animations.append(animateMove)
@@ -83,7 +83,6 @@ class CABasicAnimationController: UIViewController {
         animations.append(animateMove)
         
         let animateScale = CABasicAnimation(keyPath: "transform.scale")
-//        animateScale.duration = 1.0
         animateScale.fromValue = 1
         animateScale.toValue = 1.5
         animations.append(animateScale)

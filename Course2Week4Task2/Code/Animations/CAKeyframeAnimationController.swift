@@ -30,21 +30,26 @@ class CAKeyframeAnimationController: UIViewController {
     }
     
     func shake() {
-        let animation = CABasicAnimation(keyPath: "position")
-        animation.duration = 0.05
-        animation.repeatCount = 5
-        animation.autoreverses = true
-        animation.fromValue = CGPoint(x: passcodeTextField.center.x - 6, y: passcodeTextField.center.y)
-        animation.toValue = CGPoint(x: passcodeTextField.center.x + 6, y: passcodeTextField.center.y)
-        passcodeTextField.layer.add(animation, forKey: "position")
+        let animationPosition = CAKeyframeAnimation()
+        let yPoint = 0
+        let pathArray = [CGPoint(x: 0, y: yPoint), CGPoint(x: 10, y: yPoint), CGPoint(x: -10, y: yPoint), CGPoint(x: 10, y: yPoint), CGPoint(x: -5, y: yPoint), CGPoint(x: 5, y: yPoint), CGPoint(x: -5, y: yPoint), CGPoint(x: 0, y: yPoint)]
+        
+        animationPosition.keyTimes = [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.8, 1]
+        animationPosition.duration = 0.4
+        animationPosition.isAdditive = true
+        animationPosition.keyPath = "position"
+        animationPosition.values = pathArray
+
+        passcodeTextField.layer.add(animationPosition, forKey: "position")
     }
     
-    func movingPath() {
-        let animation = CAKeyframeAnimation(keyPath: #keyPath(CALayer.position))
+    func movingPath() {	
+        let animation = CAKeyframeAnimation(keyPath: "position")
         animation.path = sinPath()
-//        orangeView.frame.contains(CGPoint(x: sinPath().currentPoint + orangeView.center.x, y: <#T##Double#>)) = sinPath().currentPoint + orangeView.center.x
+        animation.rotationMode = CAAnimationRotationMode.rotateAuto
         animation.duration = 6.0
         animation.repeatCount = .infinity
+
         orangeView.layer.add(animation, forKey: "position")
     }
 }
