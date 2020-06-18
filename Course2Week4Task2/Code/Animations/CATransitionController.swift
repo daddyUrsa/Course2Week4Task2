@@ -12,37 +12,36 @@ class CATransitionController: UIViewController {
     @IBOutlet weak var textLabel: UILabel!
 
     @IBAction func swipeHandler(_ sender: UISwipeGestureRecognizer) {
-
         slideFromLeft()
-        textLabel.textColor = .green
-        textLabel.text = "Sliding!"
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.fadeInOut()
-            self.textLabel.textColor = .orange
-            self.textLabel.text = "Inital text"
-        }
     }
 }
 
 extension CATransitionController {
     func slideFromLeft() {
         let slideAnimationFromLeft = CATransition()
-
+        slideAnimationFromLeft.delegate = self
         slideAnimationFromLeft.type = CATransitionType.moveIn
         slideAnimationFromLeft.subtype = CATransitionSubtype.fromLeft
         slideAnimationFromLeft.duration = 1.0
         slideAnimationFromLeft.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         slideAnimationFromLeft.fillMode = CAMediaTimingFillMode.forwards
-
+        
+        textLabel.textColor = .green
+        textLabel.text = "Sliding!"
         textLabel.layer.add(slideAnimationFromLeft, forKey: "slideAnimationFromLeft")
     }
+}
 
-    func fadeInOut() {
+extension CATransitionController: CAAnimationDelegate {
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         let fadeAnimation = CATransition()
-        fadeAnimation.type = CATransitionType.fade
+        fadeAnimation.type = .fade
         fadeAnimation.duration = 1.0
         fadeAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
 
-        textLabel.layer.add(fadeAnimation, forKey: "fadeAnimation")
+        textLabel.textColor = .orange
+        textLabel.text = "Inital text"
+        textLabel.layer.add(fadeAnimation, forKey: nil)
+        
     }
 }
