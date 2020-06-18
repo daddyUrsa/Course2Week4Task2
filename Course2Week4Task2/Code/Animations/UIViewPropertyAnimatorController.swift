@@ -21,12 +21,13 @@ class UIViewPropertyAnimatorController: UIViewController {
                                                                                                             damping: 7.0,
                                                                                                             initialVelocity: .zero))
                 self.animationView.transform = CGAffineTransform(rotationAngle: .pi)
+
                 animator.addAnimations {
                     self.animationView.layer.position.x += 300.0
                     self.animationView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
                 }
 
-            animator.pauseAnimation()
+                animator.pauseAnimation()
 
             case .changed:
                 animator.fractionComplete = recognizer.translation(in: view).x / view.bounds.size.width
@@ -42,7 +43,6 @@ class UIViewPropertyAnimatorController: UIViewController {
             default:
                 ()
         }
-
     }
 }
 
