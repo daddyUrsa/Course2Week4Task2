@@ -39,14 +39,11 @@ class UIKitDynamicController: UIViewController {
         // Определяю гравитацию и добавляю поведение гравитации
         gravity = UIGravityBehavior(items: [animationView])
         animator.addBehavior(gravity)
-
-
     }
     
 }
 
 extension UIKitDynamicController {
-
 
     @objc func addPan(pan: UIGestureRecognizer) {
         attachment.anchorPoint = pan.location(in: view)

@@ -42,6 +42,5 @@ extension CATransitionController: CAAnimationDelegate {
         textLabel.textColor = .orange
         textLabel.text = "Inital text"
         textLabel.layer.add(fadeAnimation, forKey: nil)
-        
     }
 }
