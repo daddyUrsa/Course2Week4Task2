@@ -31,12 +31,13 @@ class UIViewPropertyAnimatorController: UIViewController {
 
             case .changed:
                 animator.fractionComplete = recognizer.translation(in: view).x / view.bounds.size.width
+                animator.pauseAnimation()
 
             case .ended:
-                if animationView.layer.position.x < view.center.x {
-                    animator.isReversed = false
-                } else {
+                if animationView.layer.presentation()!.position.x < view.center.x {
                     animator.isReversed = true
+                } else {
+                    animator.isReversed = false
                 }
                 animator.startAnimation()
 
